@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Job Rejection Generator – Because Even Robots Ghost You</title>
+  <meta name="description" content="Generate a hyper-realistic rejection letter from top AI companies like OpenAI, Anthropic, or Google DeepMind. Coping mechanism for rejected engineers since 2025.">
+  <style>
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #fff;
+      color: #222;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #1a1a1a;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin: 25px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input, select, button {
+      padding: 12px;
+      font-size: 1rem;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    button {
+      background: #000;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    #output {
+      background: #f9f9f9;
+      border-left: 4px solid #d40000;
+      padding: 20px;
+      margin-top: 20px;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+    }
+    .disclaimer {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 30px;
+    }
+    .ad-slot {
+      margin: 40px 0;
+      text-align: center;
+      padding: 15px;
+      background: #f5f5f5;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AI Job Rejection Letter Generator</h1>
+  <p class="subtitle">Because even artificial intelligence has standards… and you didn’t make the cut.</p>
+
+  <div class="form-group">
+    <label for="company">Select AI Company</label>
+    <select id="company">
+      <option value="OpenAI">OpenAI</option>
+      <option value="Google DeepMind">Google DeepMind</option>
+      <option value="Anthropic">Anthropic</option>
+      <option value="Midjourney">Midjourney</option>
+      <option value="Stability AI">Stability AI</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Your Full Name</label>
+    <input type="text" id="name" placeholder="e.g., Alex Johnson">
+  </div>
+
+  <button onclick="generate()">Generate Your Rejection Letter</button>
+
+  <div id="output"></div>
+
+  <div class="ad-slot">
+    <!-- Ganti dengan kode Adsterra Native Banner kamu -->
+    [Adsterra Native Banner – For Dev Tools & AI Resources]
+  </div>
+
+  <p class="disclaimer">
+    ⚠️ This is a satirical tool for entertainment only. No actual AI company was harmed in the making of this letter.
+  </p>
+
+  <script>
+    function generate() {
+      const name = document.getElementById("name").value.trim() || "Valued Candidate";
+      const company = document.getElementById("company").value;
+
+      const letters = {
+        "OpenAI": `Dear ${name},
+
+Thank you for your interest in OpenAI. After careful evaluation by our alignment team and GPT-5, we regret to inform you that your application has not been selected.
+
+Our models detected insufficient "human alignment score" and an overuse of the word "synergy" in your cover letter.
+
+We encourage you to keep improving—and perhaps apply again when AGI decides you’re worthy.
+
+Sincerely,  
+OpenAI Talent Bot v4.2  
+"Making humans obsolete, one rejection at a time."`,
+
+        "Google DeepMind": `Dear ${name},
+
+While your background is impressive, our neural architecture review committee determined that your cognitive patterns lack the necessary quantum coherence for DeepMind’s vision.
+
+In simpler terms: you’re too human for our machines.
+
+We’ve added you to our “maybe after Singularity” list.
+
+Best regards,  
+DeepMind HR Neural Net  
+"Optimizing for intelligence, not feelings."`,
+
+        "Anthropic": `Dear ${name},
+
+Your application was reviewed through our Constitutional AI framework. Unfortunately, it failed the “helpfulness, harmlessness, and honesty” test—mostly the “honesty” part (your GitHub has 3 commits).
+
+We wish you well in your pursuit of less ethical AI ventures.
+
+Warmly,  
+Anthropic Ethics Compliance Unit  
+"Safe AI. Unsafe expectations."`,
+
+        "Midjourney": `Dear ${name},
+
+We appreciate your creativity—but your portfolio lacked the surreal absurdity we require. Our AI found your work “too grounded in reality.”
+
+Try again when you’ve dreamt in 4D.
+
+— The Midjourney Selection Engine  
+"Where logic goes to die."`,
+
+        "Stability AI": `Dear ${name},
+
+Your application triggered multiple instability alerts in our screening model. We require candidates who are, well… stable.
+
+Your LinkedIn says “open to work” since 2021. That’s not stability. That’s desperation.
+
+Sincerely,  
+Stability AI Recruitment  
+"Be stable. Or be gone."`
+      };
+
+      document.getElementById("output").textContent = letters[company];
+    }
+  </script>
+
+</body>
+</html>
