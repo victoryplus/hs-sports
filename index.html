@@ -16,16 +16,24 @@
             min-height: 100vh;
         }
         
-        /* Background FULL COVER - SAMA UNTUK DESKTOP & MOBILE */
+        /* Background */
         .hero-bg {
-            background-image: url('nfhs1.jpg'); /* GANTI DENGAN PATH GAMBAR ANDA */
+            background-image: url('images/highschool-sports.jpg'); /* GANTI DENGAN PATH GAMBAR ANDA */
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: scroll;
             position: relative;
             min-height: 100vh;
-            width: 100%;
+        }
+        
+        /* KHUSUS MOBILE - pake contain biar gak aneh */
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-size: contain;
+                background-color: #0A1128;
+                background-position: top center;
+            }
         }
         
         /* OVERLAY NAVY - biar tulisan jelas */
@@ -44,7 +52,7 @@
             z-index: 1;
         }
         
-        /* Button styles - Navy dengan aksen putih/emas */
+        /* Button styles */
         .btn-navy {
             background: linear-gradient(135deg, #1E3A5F 0%, #0F1A3A 100%);
             border: 1px solid rgba(255,255,255,0.2);
@@ -171,7 +179,7 @@
                     <div class="text-blue-400">:</div>
                     <div><span id="seconds" class="text-blue-400">59</span><span class="text-xs block">SEC</span></div>
                 </div>
-                <p class="text-sm text-gray-400">¡Don't miss the action!</p>
+                <p class="text-sm text-gray-400">Don't miss the action!</p>
             </div>
             
             <!-- TOMBOL LOGIN & REGISTER -->
@@ -191,16 +199,17 @@
                 <div class="banner-label">Advertisement</div>
                 <div id="banner-middle-1">
                     <!-- ⬇️⬇️⬇️ PASTE KODE BANNER 728x90 DI SINI ⬇️⬇️⬇️ -->
-                    <script>
+                 <script>
   atOptions = {
-    'key' : '85ce87d2c92503775761ed4fff3dfb99',
+    'key' : '7ffb0c3b2b0210b9ad12988a220bd904',
     'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
+    'height' : 90,
+    'width' : 728,
     'params' : {}
   };
 </script>
-<script src="https://encouragementglutton.com/85ce87d2c92503775761ed4fff3dfb99/invoke.js"></script>
+<script src="https://encouragementglutton.com/7ffb0c3b2b0210b9ad12988a220bd904/invoke.js"></script>
+
 
                     <!-- ⬆️⬆️⬆️ PASTE KODE BANNER DI SINI ⬆️⬆️⬆️ -->
                 </div>
@@ -215,14 +224,14 @@
                     <!-- ⬇️⬇️⬇️ PASTE KODE BANNER 320x50 ATAU 468x60 DI SINI ⬇️⬇️⬇️ -->
                     <script>
   atOptions = {
-    'key' : '7ffb0c3b2b0210b9ad12988a220bd904',
+    'key' : '85ce87d2c92503775761ed4fff3dfb99',
     'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
+    'height' : 50,
+    'width' : 320,
     'params' : {}
   };
 </script>
-<script src="https://encouragementglutton.com/7ffb0c3b2b0210b9ad12988a220bd904/invoke.js"></script>
+<script src="https://encouragementglutton.com/85ce87d2c92503775761ed4fff3dfb99/invoke.js"></script>
 
                     <!-- ⬆️⬆️⬆️ PASTE KODE BANNER DI SINI ⬆️⬆️⬆️ -->
                 </div>
