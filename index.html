@@ -1,184 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Job Rejection Generator – Because Even Robots Ghost You</title>
-  <meta name="description" content="Generate a hyper-realistic rejection letter from top AI companies like OpenAI, Anthropic, or Google DeepMind. Coping mechanism for rejected engineers since 2025.">
-  <style>
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background: #fff;
-      color: #222;
-      line-height: 1.6;
-    }
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-      color: #1a1a1a;
-    }
-    .subtitle {
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 30px;
-    }
-    .form-group {
-      margin: 25px 0;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-    input, select, button {
-      padding: 12px;
-      font-size: 1rem;
-      width: 100%;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      margin-bottom: 10px;
-    }
-    button {
-      background: #000;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    button:hover {
-      opacity: 0.9;
-    }
-    #output {
-      background: #f9f9f9;
-      border-left: 4px solid #d40000;
-      padding: 20px;
-      margin-top: 20px;
-      font-family: 'Courier New', monospace;
-      white-space: pre-wrap;
-    }
-    .disclaimer {
-      font-size: 0.85rem;
-      color: #888;
-      margin-top: 30px;
-    }
-    .ad-slot {
-      margin: 40px 0;
-      text-align: center;
-      padding: 15px;
-      background: #f5f5f5;
-      border-radius: 8px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>High School Sports - Live Streaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0A1128 0%, #0F1A3A 50%, #1A2A4A 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        /* Background FULL COVER - SAMA UNTUK DESKTOP & MOBILE */
+        .hero-bg {
+            background-image: url('nfhs1.jpg'); /* GANTI DENGAN PATH GAMBAR ANDA */
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+        }
+        
+        /* OVERLAY NAVY - biar tulisan jelas */
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10,17,40,0.85) 0%, rgba(26,42,74,0.8) 100%);
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Button styles - Navy dengan aksen putih/emas */
+        .btn-navy {
+            background: linear-gradient(135deg, #1E3A5F 0%, #0F1A3A 100%);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .btn-navy:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #2A4A7A 0%, #1A2A4A 100%);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .text-navy-accent {
+            color: #4A90E2;
+        }
+        
+        .card-navy {
+            background: rgba(10, 17, 40, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            border-radius: 20px;
+        }
+        
+        /* Container untuk banner iklan */
+        .banner-container {
+            text-align: center;
+            margin: 20px auto;
+            padding: 8px 0;
+            clear: both;
+            overflow: hidden;
+        }
+        
+        .banner-label {
+            font-size: 9px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        
+        .banner-container iframe,
+        .banner-container img,
+        .banner-container ins {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+        
+        @keyframes pulse-blue {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .live-badge {
+            animation: pulse-blue 1.5s infinite;
+        }
+        
+        .feature-text {
+            line-height: 1.8;
+        }
+        
+        .stat-card {
+            background: rgba(30, 58, 95, 0.4);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            background: rgba(30, 58, 95, 0.6);
+            border-color: #4A90E2;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>AI Job Rejection Letter Generator</h1>
-  <p class="subtitle">Because even artificial intelligence has standards… and you didn’t make the cut.</p>
-
-  <div class="form-group">
-    <label for="company">Select AI Company</label>
-    <select id="company">
-      <option value="OpenAI">OpenAI</option>
-      <option value="Google DeepMind">Google DeepMind</option>
-      <option value="Anthropic">Anthropic</option>
-      <option value="Midjourney">Midjourney</option>
-      <option value="Stability AI">Stability AI</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="name">Your Full Name</label>
-    <input type="text" id="name" placeholder="e.g., Alex Johnson">
-  </div>
-
-  <button onclick="generate()">Generate Your Rejection Letter</button>
-
-  <div id="output"></div>
-
-  <div class="ad-slot">
-    <!-- Ganti dengan kode Adsterra Native Banner kamu -->
-    <script>
+    <!-- ========================================== -->
+    <!-- HERO SECTION - HIGH SCHOOL SPORTS -->
+    <!-- ========================================== -->
+    <div class="hero-bg flex items-center justify-center">
+        <div class="hero-content text-center px-4 py-16 max-w-4xl mx-auto">
+            
+            <!-- Logo & Title -->
+            <div class="mb-8">
+                <div class="inline-block px-4 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-xs font-bold mb-4 live-badge">
+                    🏆 LIVE • FALL SEASON 2026
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-wider">
+                    HIGH SCHOOL <span class="text-blue-400">SPORTS</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
+                    Watch your favorite teams live<br>
+                    <span class="text-blue-400 font-bold">Free Streaming • 4K Ultra HD Quality</span>
+                </p>
+            </div>
+            
+            <!-- ========================================== -->
+            <!-- 🟡 BANNER #1 - DI ATAS TIMER -->
+            <!-- ========================================== -->
+            <div class="banner-container">
+                <div class="banner-label">Advertisement</div>
+                <div id="banner-top">
+                    <!-- ⬇️⬇️⬇️ PASTE KODE BANNER 728x90 ATAU 468x60 DI SINI ⬇️⬇️⬇️ -->
+                    <script>
   atOptions = {
-    'key' : '5550bca4dd907fd57586bc3efc0e01c8',
+    'key' : '85ce87d2c92503775761ed4fff3dfb99',
     'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
+    'height' : 50,
+    'width' : 320,
     'params' : {}
   };
 </script>
-<script src="https://curvemodernforester.com/5550bca4dd907fd57586bc3efc0e01c8/invoke.js"></script>
-  </div>
+<script src="https://encouragementglutton.com/85ce87d2c92503775761ed4fff3dfb99/invoke.js"></script>
 
-  <p class="disclaimer">
-    ⚠️ This is a satirical tool for entertainment only. No actual AI company was harmed in the making of this letter.
-  </p>
+                    <!-- ⬆️⬆️⬆️ PASTE KODE BANNER DI SINI ⬆️⬆️⬆️ -->
+                </div>
+            </div>
+            
+            <!-- COUNTDOWN TIMER -->
+            <div class="max-w-md mx-auto card-navy p-6 mb-8">
+                <p class="text-gray-400 text-sm mb-2">🏈 NEXT BIG GAME</p>
+                <div class="flex justify-center gap-6 text-3xl font-bold mb-2">
+                    <div><span id="hours" class="text-blue-400">24</span><span class="text-xs block">HOURS</span></div>
+                    <div class="text-blue-400">:</div>
+                    <div><span id="minutes" class="text-blue-400">59</span><span class="text-xs block">MIN</span></div>
+                    <div class="text-blue-400">:</div>
+                    <div><span id="seconds" class="text-blue-400">59</span><span class="text-xs block">SEC</span></div>
+                </div>
+                <p class="text-sm text-gray-400">¡Don't miss the action!</p>
+            </div>
+            
+            <!-- TOMBOL LOGIN & REGISTER -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+                <a href="https://encouragementglutton.com/s39197pa43?key=f132dc8786265785a27bbdb37efd062e" class="btn-navy px-8 py-3 rounded-full text-white font-semibold text-lg shadow-lg transition-all duration-300 hover:scale-105">
+                    🔐 LOGIN
+                </a>
+                <a href="https://encouragementglutton.com/s39197pa43?key=f132dc8786265785a27bbdb37efd062e" class="btn-navy px-8 py-3 rounded-full text-white font-semibold text-lg shadow-lg transition-all duration-300 hover:scale-105">
+                    ✨ REGISTER FREE →
+                </a>
+            </div>
+            
+            <!-- ========================================== -->
+            <!-- 🟡 BANNER #2 - DI BAWAH TOMBOL -->
+            <!-- ========================================== -->
+            <div class="banner-container">
+                <div class="banner-label">Advertisement</div>
+                <div id="banner-middle-1">
+                    <!-- ⬇️⬇️⬇️ PASTE KODE BANNER 728x90 DI SINI ⬇️⬇️⬇️ -->
+                    <script>
+  atOptions = {
+    'key' : '85ce87d2c92503775761ed4fff3dfb99',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://encouragementglutton.com/85ce87d2c92503775761ed4fff3dfb99/invoke.js"></script>
 
-  <script>
-    function generate() {
-      const name = document.getElementById("name").value.trim() || "Valued Candidate";
-      const company = document.getElementById("company").value;
+                    <!-- ⬆️⬆️⬆️ PASTE KODE BANNER DI SINI ⬆️⬆️⬆️ -->
+                </div>
+            </div>
+            
+            <!-- ========================================== -->
+            <!-- 🟡 BANNER #3 - DI BAWAH TOMBOL (bawah) -->
+            <!-- ========================================== -->
+            <div class="banner-container">
+                <div class="banner-label">Advertisement</div>
+                <div id="banner-middle-2">
+                    <!-- ⬇️⬇️⬇️ PASTE KODE BANNER 320x50 ATAU 468x60 DI SINI ⬇️⬇️⬇️ -->
+                    <script>
+  atOptions = {
+    'key' : '7ffb0c3b2b0210b9ad12988a220bd904',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://encouragementglutton.com/7ffb0c3b2b0210b9ad12988a220bd904/invoke.js"></script>
 
-      const letters = {
-        "OpenAI": `Dear ${name},
+                    <!-- ⬆️⬆️⬆️ PASTE KODE BANNER DI SINI ⬆️⬆️⬆️ -->
+                </div>
+            </div>
+            
+            <p class="text-gray-500 text-xs mt-4">No credit card required • Instant access • Watch anywhere</p>
+        </div>
+    </div>
 
-Thank you for your interest in OpenAI. After careful evaluation by our alignment team and GPT-5, we regret to inform you that your application has not been selected.
+    <!-- ========================================== -->
+    <!-- STATS & FEATURES -->
+    <!-- ========================================== -->
+    <div class="max-w-6xl mx-auto px-4 py-16">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="stat-card p-4 rounded-xl text-center">
+                <div class="text-3xl mb-2">🏈</div>
+                <p class="font-bold text-xl">500+</p>
+                <p class="text-xs text-gray-400">Live Games/Season</p>
+            </div>
+            <div class="stat-card p-4 rounded-xl text-center">
+                <div class="text-3xl mb-2">🏀</div>
+                <p class="font-bold text-xl">50+</p>
+                <p class="text-xs text-gray-400">High Schools</p>
+            </div>
+            <div class="stat-card p-4 rounded-xl text-center">
+                <div class="text-3xl mb-2">📺</div>
+                <p class="font-bold text-xl">4K</p>
+                <p class="text-xs text-gray-400">Ultra HD Quality</p>
+            </div>
+            <div class="stat-card p-4 rounded-xl text-center">
+                <div class="text-3xl mb-2">⚡</div>
+                <p class="font-bold text-xl">0</p>
+                <p class="text-xs text-gray-400">Buffering</p>
+            </div>
+        </div>
+    </div>
 
-Our models detected insufficient "human alignment score" and an overuse of the word "synergy" in your cover letter.
+    <!-- ========================================== -->
+    <!-- KONTEN PROMOSI -->
+    <!-- ========================================== -->
+    <div class="max-w-4xl mx-auto px-4 pb-16">
+        <div class="card-navy p-8 md:p-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                🎓 <span class="text-blue-400">FREE</span> for Students & Families!
+            </h2>
+            
+            <div class="space-y-6 text-gray-300 feature-text text-left md:text-center">
+                <p>
+                    🏆 <strong class="text-white">High School Sports Network</strong> brings you LIVE coverage of 
+                    football, basketball, baseball, soccer, volleyball, and more from schools across the nation.
+                </p>
+                
+                <p>
+                    📺 <strong class="text-white">Watch on any device:</strong> Smart TV, Laptop, Tablet, or Smartphone
+                </p>
+                
+                <p>
+                    🎙️ <strong class="text-white">Professional commentary</strong> • Instant replays • Real-time stats
+                </p>
+                
+                <p>
+                    🏅 <strong class="text-white">Championship games, playoffs, and rivalries</strong> — every moment matters!
+                </p>
+                
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6 mt-8">
+                    <p class="text-xl font-semibold">
+                        🔥 <strong class="text-blue-400">LIMITED TIME OFFER</strong> — Premium Access FREE
+                    </p>
+                    <p class="text-sm text-gray-300 mt-2">
+                        Click REGISTER or LOGIN now to start watching
+                    </p>
+                    <p class="text-xs text-gray-400 mt-3">
+                        ✅ No credit card • ✅ Cancel anytime • ✅ 100% free trial
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-We encourage you to keep improving—and perhaps apply again when AGI decides you’re worthy.
+    <!-- ========================================== -->
+    <!-- SPORTS GRID -->
+    <!-- ========================================== -->
+    <div class="max-w-6xl mx-auto px-4 pb-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">
+            COVERING <span class="text-blue-400">ALL SPORTS</span>
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-3 text-center">
+            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div class="text-2xl">🏈</div>
+                <p class="text-xs font-semibold mt-1">Football</p>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div class="text-2xl">🏀</div>
+                <p class="text-xs font-semibold mt-1">Basketball</p>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div class="text-2xl">⚾</div>
+                <p class="text-xs font-semibold mt-1">Baseball</p>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div class="text-2xl">⚽</div>
+                <p class="text-xs font-semibold mt-1">Soccer</p>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div class="text-2xl">🏐</div>
+                <p class="text-xs font-semibold mt-1">Volleyball</p>
+            </div>
+            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div class="text-2xl">🏃</div>
+                <p class="text-xs font-semibold mt-1">Track</p>
+            </div>
+        </div>
+    </div>
 
-Sincerely,  
-OpenAI Talent Bot v4.2  
-"Making humans obsolete, one rejection at a time."`,
+    <!-- ========================================== -->
+    <!-- FOOTER -->
+    <!-- ========================================== -->
+    <footer class="border-t border-blue-500/20 mt-8 py-8 text-center text-gray-500 text-xs">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="hover:text-blue-400">Terms & Conditions</a>
+                <a href="#" class="hover:text-blue-400">Privacy Policy</a>
+                <a href="#" class="hover:text-blue-400">Contact Us</a>
+            </div>
+            <p>&copy; 2026 High School Sports Network. All rights reserved.</p>
+            <p class="mt-1">Empowering young athletes • Celebrating school spirit</p>
+        </div>
+    </footer>
 
-        "Google DeepMind": `Dear ${name},
-
-While your background is impressive, our neural architecture review committee determined that your cognitive patterns lack the necessary quantum coherence for DeepMind’s vision.
-
-In simpler terms: you’re too human for our machines.
-
-We’ve added you to our “maybe after Singularity” list.
-
-Best regards,  
-DeepMind HR Neural Net  
-"Optimizing for intelligence, not feelings."`,
-
-        "Anthropic": `Dear ${name},
-
-Your application was reviewed through our Constitutional AI framework. Unfortunately, it failed the “helpfulness, harmlessness, and honesty” test—mostly the “honesty” part (your GitHub has 3 commits).
-
-We wish you well in your pursuit of less ethical AI ventures.
-
-Warmly,  
-Anthropic Ethics Compliance Unit  
-"Safe AI. Unsafe expectations."`,
-
-        "Midjourney": `Dear ${name},
-
-We appreciate your creativity—but your portfolio lacked the surreal absurdity we require. Our AI found your work “too grounded in reality.”
-
-Try again when you’ve dreamt in 4D.
-
-— The Midjourney Selection Engine  
-"Where logic goes to die."`,
-
-        "Stability AI": `Dear ${name},
-
-Your application triggered multiple instability alerts in our screening model. We require candidates who are, well… stable.
-
-Your LinkedIn says “open to work” since 2021. That’s not stability. That’s desperation.
-
-Sincerely,  
-Stability AI Recruitment  
-"Be stable. Or be gone."`
-      };
-
-      document.getElementById("output").textContent = letters[company];
-    }
-  </script>
-
+    <!-- ========================================== -->
+    <!-- COUNTDOWN SCRIPT -->
+    <!-- ========================================== -->
+    <script>
+        function startCountdown() {
+            const endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById('hours').innerText = '00';
+                    document.getElementById('minutes').innerText = '00';
+                    document.getElementById('seconds').innerText = '00';
+                    return;
+                }
+                document.getElementById('hours').innerText = Math.floor(distance / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }, 1000);
+        }
+        document.addEventListener('DOMContentLoaded', startCountdown);
+    </script>
+  <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,5023630,4,22,130,30,00011111']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5023630&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->
 </body>
 </html>
