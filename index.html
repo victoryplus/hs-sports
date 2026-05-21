@@ -1,401 +1,515 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>High School Sports - Live Streaming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>High School Sports TV | Live Stream</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0A1128 0%, #0F1A3A 50%, #1A2A4A 100%);
-            color: white;
-            min-height: 100vh;
-        }
-        
-        /* Background */
-        .hero-bg {
-            background-image: url('nfhs1.jpg'); /* GANTI DENGAN PATH GAMBAR ANDA */
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            position: relative;
-            min-height: 100vh;
-        }
-        
-        /* KHUSUS MOBILE - pake contain biar gak aneh */
-        @media (max-width: 768px) {
-            .hero-bg {
-                background-size: contain;
-                background-color: #0A1128;
-                background-position: top center;
+    <!-- Google Fonts: Montserrat (Ultra Bold) & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        hsRed: '#ff0000',
+                        hsRedHover: '#cc0000',
+                        hsGreen: '#00c853',
+                        hsGreenHover: '#00a844',
+                        darkBg: '#0a0a0a',
+                        darkCard: '#141414',
+                    }
+                }
             }
         }
-        
-        /* OVERLAY NAVY - biar tulisan jelas */
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(10,17,40,0.85) 0%, rgba(26,42,74,0.8) 100%);
-            z-index: 0;
+    </script>
+    <style>
+        /* Desain teks tebal terkompresi khas NFHS Banner */
+        .header-compressed-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.05em;
         }
-        .hero-content {
-            position: relative;
-            z-index: 1;
+        /* Animasi geser lambat untuk korsel logo sekolah di bagian atas */
+        @keyframes scrollBadges {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-        
-        /* Button styles */
-        .btn-navy {
-            background: linear-gradient(135deg, #1E3A5F 0%, #0F1A3A 100%);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        .animate-scroll-badges {
+            animation: scrollBadges 25s linear infinite;
         }
-        .btn-navy:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, #2A4A7A 0%, #1A2A4A 100%);
-            border-color: rgba(255,255,255,0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .text-navy-accent {
-            color: #4A90E2;
-        }
-        
-        .card-navy {
-            background: rgba(10, 17, 40, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(74, 144, 226, 0.3);
-            border-radius: 20px;
-        }
-        
-        /* Container untuk banner iklan */
-        .banner-container {
-            text-align: center;
-            margin: 20px auto;
-            padding: 8px 0;
-            clear: both;
-            overflow: hidden;
-        }
-        
-        .banner-label {
-            font-size: 9px;
-            color: rgba(255,255,255,0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-        
-        .banner-container iframe,
-        .banner-container img,
-        .banner-container ins {
-            max-width: 100%;
-            height: auto;
-            margin: 0 auto;
-        }
-        
-        @keyframes pulse-blue {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-        .live-badge {
-            animation: pulse-blue 1.5s infinite;
-        }
-        
-        .feature-text {
-            line-height: 1.8;
-        }
-        
-        .stat-card {
-            background: rgba(30, 58, 95, 0.4);
-            border: 1px solid rgba(74, 144, 226, 0.3);
-            transition: all 0.3s ease;
-        }
-        .stat-card:hover {
-            background: rgba(30, 58, 95, 0.6);
-            border-color: #4A90E2;
+        /* Seeker bar styling */
+        .seeker-progress {
+            width: 35%;
         }
     </style>
 </head>
-<body>
+<body class="bg-black text-white font-sans overflow-x-hidden min-h-screen pb-safe">
 
-    <!-- ========================================== -->
-    <!-- HERO SECTION - HIGH SCHOOL SPORTS -->
-    <!-- ========================================== -->
-    <div class="hero-bg flex items-center justify-center">
-        <div class="hero-content text-center px-4 py-16 max-w-4xl mx-auto">
+    <!-- === 1. TOP MARQUEE BADGES BAR (Korsel Logo Asosiasi Sekolah) === -->
+    <div class="w-full bg-[#111111] overflow-hidden py-1.5 border-b border-white/5 relative z-50">
+        <div class="flex whitespace-nowrap animate-scroll-badges items-center space-x-12">
             
-            <!-- Logo & Title -->
-            <div class="mb-8">
-                <div class="inline-block px-4 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-xs font-bold mb-4 live-badge">
-                    🏆 LIVE • FALL SEASON 2026
-                </div>
-                <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-wider">
-                    HIGH SCHOOL <span class="text-blue-400">SPORTS</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
-                    Watch your favorite teams live<br>
-                    <span class="text-blue-400 font-bold">Free Streaming • 4K Ultra HD Quality</span>
-                </p>
+            <!-- Blok Logo (Akan diulang untuk efek looping tanpa celah) -->
+            <div class="flex items-center space-x-12 text-[10px] font-bold text-gray-400">
+                <span class="flex items-center"><span class="bg-red-600 text-white px-1.5 py-0.5 rounded mr-1.5 text-[8px]">HS</span> HIGH SCHOOL</span>
+                <span class="text-blue-500 font-extrabold">PIAA</span>
+                <span class="text-green-500 font-extrabold">OHSAA</span>
+                <span class="text-yellow-500 font-extrabold">OSAA</span>
+                <span class="text-red-500 font-extrabold">MHSAA</span>
+                <span class="text-indigo-400 font-extrabold">SSAC</span>
+                <span class="text-white font-extrabold">UIL</span>
+                <span class="text-blue-400 font-extrabold">CIF</span>
+                <span class="text-orange-500 font-extrabold">NYSPHSAA</span>
             </div>
             
-            <!-- ========================================== -->
-            <!-- 🟡 BANNER #1 - DI ATAS TIMER -->
-            <!-- ========================================== -->
-            <div class="banner-container">
-                <div class="banner-label">Advertisement</div>
-                <div id="banner-top">
-                    <!-- ⬇️⬇️⬇️ PASTE KODE BANNER 728x90 ATAU 468x60 DI SINI ⬇️⬇️⬇️ -->
-                    <script>
-  atOptions = {
-    'key' : '85ce87d2c92503775761ed4fff3dfb99',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://encouragementglutton.com/85ce87d2c92503775761ed4fff3dfb99/invoke.js"></script>
+            <!-- Duplikasi Blok untuk Loop Sempurna -->
+            <div class="flex items-center space-x-12 text-[10px] font-bold text-gray-400" aria-hidden="true">
+                <span class="flex items-center"><span class="bg-red-600 text-white px-1.5 py-0.5 rounded mr-1.5 text-[8px]">HS</span> HIGH SCHOOL</span>
+                <span class="text-blue-500 font-extrabold">PIAA</span>
+                <span class="text-green-500 font-extrabold">OHSAA</span>
+                <span class="text-yellow-500 font-extrabold">OSAA</span>
+                <span class="text-red-500 font-extrabold">MHSAA</span>
+                <span class="text-indigo-400 font-extrabold">SSAC</span>
+                <span class="text-white font-extrabold">UIL</span>
+                <span class="text-blue-400 font-extrabold">CIF</span>
+                <span class="text-orange-500 font-extrabold">NYSPHSAA</span>
+            </div>
 
-                    <!-- ⬆️⬆️⬆️ PASTE KODE BANNER DI SINI ⬆️⬆️⬆️ -->
+        </div>
+    </div>
+
+    <!-- === 2. NAVIGATION BAR KECIL === -->
+    <nav class="w-full bg-[#0a0a0a] py-3 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <!-- Label Brand Kiri -->
+            <div class="flex items-center space-x-2">
+                <div class="bg-blue-600 text-white font-montserrat font-black text-xs px-1.5 py-0.5 rounded">
+                    LIVE
                 </div>
+                <span class="font-montserrat font-black text-sm tracking-wide uppercase">HS SCHOOL SPORTS Live</span>
             </div>
             
-            <!-- COUNTDOWN TIMER -->
-            <div class="max-w-md mx-auto card-navy p-6 mb-8">
-                <p class="text-gray-400 text-sm mb-2">🏈 NEXT BIG GAME</p>
-                <div class="flex justify-center gap-6 text-3xl font-bold mb-2">
-                    <div><span id="hours" class="text-blue-400">24</span><span class="text-xs block">HOURS</span></div>
-                    <div class="text-blue-400">:</div>
-                    <div><span id="minutes" class="text-blue-400">59</span><span class="text-xs block">MIN</span></div>
-                    <div class="text-blue-400">:</div>
-                    <div><span id="seconds" class="text-blue-400">59</span><span class="text-xs block">SEC</span></div>
+            <!-- === [DIRECT LINK: TOMBOL LOGIN NAV] === -->
+            <!-- Ganti URL di dalam href="..." di bawah ini dengan direct link login Anda -->
+            <a href="https://your-login-url.com" class="text-xs text-gray-300 hover:text-white font-bold transition-colors">
+                Login
+            </a>
+        </div>
+    </nav>
+
+    <!-- === 3. HERO BILLBOARD BANNER === -->
+    <section class="bg-[#141414] border-b-2 border-blue-600 py-6 sm:py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <!-- Sisi Kiri: Status Live & Judul Slogan Besar -->
+                <div class="flex items-center space-x-4 sm:space-x-6 text-center md:text-left">
+                    <!-- Indikator Bulat Live Merah Menyala -->
+                    <div class="bg-hsRed text-white font-montserrat font-black tracking-widest text-xs sm:text-sm px-4 py-2 rounded-md flex items-center shrink-0">
+                        <span class="w-2.5 h-2.5 bg-white rounded-full mr-2 animate-ping"></span>
+                        LIVE
+                    </div>
+                    <!-- Judul Utama -->
+                    <h2 class="header-compressed-text text-xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-none uppercase">
+                        WATCH HIGH SCHOOL <br class="hidden sm:inline"> SPORTS ONLINE
+                    </h2>
                 </div>
-                <p class="text-sm text-gray-400">Don't miss the action!</p>
+
+                <!-- Sisi Kanan: Tombol Langganan & Masuk Bertumpuk -->
+                <div class="flex flex-col sm:flex-row md:flex-col gap-3 w-full sm:w-auto shrink-0">
+                    
+                    <!-- === [DIRECT LINK: TOMBOL SUBSCRIBE NOW] === -->
+                    <!-- Ganti URL di dalam href="..." di bawah ini dengan direct link subscribe Anda -->
+                    <a href="https://your-subscribe-url.com" class="w-full sm:w-44 text-center py-2.5 bg-hsRed text-white font-montserrat font-black text-xs uppercase tracking-wider rounded hover:bg-hsRedHover transition-all">
+                        Subscribe Now
+                    </a>
+                    
+                    <!-- === [DIRECT LINK: TOMBOL LOG IN HERO] === -->
+                    <!-- Ganti URL di dalam href="..." di bawah ini dengan direct link login Anda -->
+                    <a href="https://your-login-url.com" class="w-full sm:w-44 text-center py-2.5 border border-white text-white font-montserrat font-black text-xs uppercase tracking-wider rounded hover:bg-white/10 transition-all">
+                        Log In
+                    </a>
+
+                </div>
+
             </div>
+        </div>
+    </section>
+
+    <!-- === 4. MEDIA PLAYER CONTAINER WITH REGISTER PAYWALL (Unified and Responsive) === -->
+    <section class="max-w-5xl mx-auto px-4 pt-8">
+        
+        <!-- Wadah Terpadu yang Menjamin Lebar Player & Kontrol Selalu Sama Presisi -->
+        <div class="w-full bg-black rounded-xl overflow-hidden border border-white/10 shadow-2xl flex flex-col">
             
-            <!-- TOMBOL LOGIN & REGISTER -->
-            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
-                <a href="https://encouragementglutton.com/s39197pa43?key=f132dc8786265785a27bbdb37efd062e" class="btn-navy px-8 py-3 rounded-full text-white font-semibold text-lg shadow-lg transition-all duration-300 hover:scale-105">
-                    🔐 LOGIN
+            <!-- Video Screen dengan Aspect Ratio Tetap (16:9) Agar Tidak Terpotong di Mobile -->
+            <div class="relative w-full aspect-video flex flex-col items-center justify-center p-4 sm:p-8 text-center select-none overflow-hidden bg-neutral-950">
+                
+                <!-- === [TANDA: GANTI BACKGROUND VIDEO PLAYER DI SINI] === -->
+                <!-- 
+                  PETUNJUK RESPONSIVITAS:
+                  - Menggunakan 'object-contain' agar seluruh gambar pas di layar dan TIDAK terpotong (fit screen).
+                  - Jika ingin gambar memenuhi seluruh area layar player (tetapi akan ada sedikit pemotongan di pinggir), ganti 'object-contain' menjadi 'object-cover'.
+                -->
+                <div class="absolute inset-0 z-0">
+                    <img src="nfhhs.jpg" 
+                         alt="Player Background Image" 
+                         class="w-full h-full object-contain object-center opacity-50">
+                    <!-- Lapisan bayangan agar teks tetap sangat mudah dibaca -->
+                    <div class="absolute inset-0 bg-black/60"></div>
+                </div>
+                <!-- === [AKHIR BAGIAN BACKGROUND VIDEO PLAYER] === -->
+
+                <!-- Konten Tengah Pembatasan Akses (Paywall Gateway) -->
+                <div class="relative z-10 max-w-lg flex flex-col items-center px-2">
+                    
+                    <!-- Teks Notifikasi Utama -->
+                    <h3 class="text-sm sm:text-xl lg:text-2xl font-bold text-gray-200 tracking-tight leading-snug">
+                        Sports HS SCHOOL SPORTS Live Is Only Available For Registered Users. 
+                        Create a <span class="text-hsGreen font-extrabold">FREE</span> account to get access to your HD stream
+                    </h3>
+                    
+                    <!-- === [DIRECT LINK: TOMBOL CREATE A FREE ACCOUNT] === -->
+                    <!-- Ganti link tujuan di href="..." dengan tautan pendaftaran atau affiliate link Anda -->
+                    <a href="https://your-register-url.com" class="mt-6 sm:mt-8 px-6 py-3 sm:px-8 sm:py-4 bg-hsGreen hover:bg-hsGreenHover text-white font-montserrat font-black tracking-wide text-[10px] sm:text-sm uppercase rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg shadow-hsGreen/30">
+                        CREATE A FREE ACCOUNT
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- === 5. MEDIA CONTROLS BAR (Lebar Selalu Sama Presisi dengan Player di Atas) === -->
+            <div class="w-full bg-[#111111] border-t border-white/10 px-4 py-3.5 flex flex-row items-center justify-between gap-4">
+                <!-- Sisi Kiri: Tombol Play & Garis Seeker -->
+                <div class="flex items-center space-x-4 flex-grow">
+                    <!-- Tombol Play/Pause -->
+                    <button class="text-gray-300 hover:text-white transition-colors">
+                        <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                    </button>
+                    
+                    <!-- Garis Seeker Progress Bar -->
+                    <div class="flex-grow bg-gray-800 h-1.5 rounded-full relative overflow-hidden cursor-pointer">
+                        <div class="bg-blue-600 h-full rounded-full seeker-progress"></div>
+                    </div>
+                </div>
+
+                <!-- Sisi Kanan: Volume, Layar Penuh & Status Live -->
+                <div class="flex items-center space-x-4 shrink-0">
+                    <!-- Tombol Volume & Slider Mini (Sembunyi di HP Sangat Kecil agar muat) -->
+                    <div class="hidden sm:flex items-center space-x-2">
+                        <i data-lucide="volume-2" class="w-4 h-4 text-gray-400"></i>
+                        <div class="w-16 bg-gray-800 h-1 rounded-full overflow-hidden">
+                            <div class="bg-white h-full w-4/5"></div>
+                        </div>
+                    </div>
+                    <!-- Tombol Fullscreen -->
+                    <button class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="maximize" class="w-4 h-4"></i>
+                    </button>
+                    <!-- Indikator Live Merah Kanan -->
+                    <div class="flex items-center text-[10px] font-bold text-hsRed uppercase tracking-widest bg-hsRed/10 px-2 py-0.5 rounded border border-hsRed/20">
+                        <span class="w-1.5 h-1.5 bg-hsRed rounded-full mr-1.5 animate-pulse"></span>
+                        LIVE
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bilah Biru dengan Tombol Turun -->
+        <div class="w-full bg-blue-600 hover:bg-blue-700 transition-colors py-2 flex items-center justify-center rounded-b-xl cursor-pointer">
+            <span class="font-montserrat font-black text-xs text-white">V</span>
+        </div>
+    </section>
+
+    <!-- === 6. SPASI IKLAN BANNER 1 (DIBAWAH PLAYER) === -->
+    <section class="max-w-4xl mx-auto px-4 mt-8">
+        <div class="w-full flex flex-col items-center justify-center min-h-[50px]">
+            
+            <!-- 
+              ==================================================================
+              [TANDA: TEMPAT PASTE KODE IKLAN ADSTERRA 1]
+              ==================================================================
+              PETUNJUK:
+              Hapus elemen <div class="adsterra-banner-container">...</div> di bawah ini 
+              dan langsung paste kode script HTML/Iframe iklan Adsterra Anda di sini.
+            -->
+            <div class="adsterra-banner-container w-full text-center py-4 bg-darkCard border border-dashed border-white/10 rounded-xl text-[9px] text-gray-600 tracking-widest uppercase">
+                [ Space Iklan Banner 1 - Adsterra ]
+            </div>
+            <!-- =============================================================== -->
+
+        </div>
+    </section>
+
+    <!-- === 7. SPASI IKLAN BANNER 2 === -->
+    <section class="max-w-4xl mx-auto px-4 mt-4">
+        <div class="w-full flex flex-col items-center justify-center min-h-[50px]">
+            
+            <!-- 
+              ==================================================================
+              [TANDA: TEMPAT PASTE KODE IKLAN ADSTERRA 2]
+              ==================================================================
+              PETUNJUK:
+              Hapus elemen <div class="adsterra-banner-container">...</div> di bawah ini 
+              dan langsung paste kode script HTML/Iframe iklan Adsterra Anda di sini.
+            -->
+            <div class="adsterra-banner-container w-full text-center py-4 bg-darkCard border border-dashed border-white/10 rounded-xl text-[9px] text-gray-600 tracking-widest uppercase">
+                [ Space Iklan Banner 2 - Adsterra ]
+            </div>
+            <!-- =============================================================== -->
+
+        </div>
+    </section>
+
+    <!-- === 8. GRID CABANG OLAHRAGA TERPOPULER (Top Sports dengan Ikon Sesuai Olahraganya) === -->
+    <section class="max-w-5xl mx-auto px-4 py-16">
+        <div class="bg-[#141414] border border-white/5 rounded-xl p-6 sm:p-8">
+            <h3 class="text-center font-montserrat font-black text-lg tracking-wider text-gray-300 uppercase mb-8">
+                Top Sports
+            </h3>
+
+            <!-- Grid 8 Tombol Cabang Olahraga dengan Ikon Presisi & Tautan Langsung -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+                
+                <!-- Baseball (Pemukul Baseball Berpapasan & Bola) -->
+                <!-- === [DIRECT LINK: BASEBALL] === -->
+                <a href="https://your-baseball-url.com" class="bg-[#222222] border border-white/5 hover:border-blue-600 hover:bg-[#2c2c2c] p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all group">
+                    <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-500 mb-2 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Bat 1 -->
+                        <path d="M19 2l2 2L6 19c-.8.8-2 .4-2.5-.5s-.1-2.2.7-3L19 2z" />
+                        <!-- Bat Grip -->
+                        <path d="M4 17l2 2" />
+                        <!-- Baseball Ball -->
+                        <circle cx="16" cy="16" r="3.5" />
+                        <path d="M14 13.5a3.5 3.5 0 0 0 4 4" />
+                    </svg>
+                    <span class="text-[11px] font-bold tracking-wide uppercase text-gray-300">Baseball</span>
                 </a>
-                <a href="https://encouragementglutton.com/s39197pa43?key=f132dc8786265785a27bbdb37efd062e" class="btn-navy px-8 py-3 rounded-full text-white font-semibold text-lg shadow-lg transition-all duration-300 hover:scale-105">
-                    ✨ REGISTER FREE →
+
+                <!-- Basketball (Bola Basket Khas 8 Panel) -->
+                <!-- === [DIRECT LINK: BASKETBALL] === -->
+                <a href="https://your-basketball-url.com" class="bg-[#222222] border border-white/5 hover:border-blue-600 hover:bg-[#2c2c2c] p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all group">
+                    <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-500 mb-2 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10" />
+                        <!-- Jalur Melengkung Sisi Kiri & Kanan -->
+                        <path d="M6.2 6.2c2.5 2.5 2.5 9.1 0 11.6" />
+                        <path d="M17.8 6.2c-2.5 2.5-2.5 9.1 0 11.6" />
+                        <!-- Garis Silang Tengah -->
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <line x1="12" y1="2" x2="12" y2="22" />
+                    </svg>
+                    <span class="text-[11px] font-bold tracking-wide uppercase text-gray-300">Basketball</span>
                 </a>
+
+                <!-- Cheer & Dance (Rumbai Pom-pom Cheerleader) -->
+                <!-- === [DIRECT LINK: CHEER] === -->
+                <a href="https://your-cheer-url.com" class="bg-[#222222] border border-white/5 hover:border-blue-600 hover:bg-[#2c2c2c] p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all group">
+                    <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-500 mb-2 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                        <!-- Pegangan Tengah Pom-pom -->
+                        <path d="M12 10v4" stroke-width="2.5" />
+                        <!-- Rumbai Kiri -->
+                        <path d="M10 8l-4-3M10 11l-5-1M10 13l-5 1.5M10 16l-4 3" />
+                        <!-- Rumbai Kanan -->
+                        <path d="M14 8l4-3M14 11l5-1M14 13l5 1.5M14 16l4 3" />
+                        <!-- Rumbai Atas/Bawah -->
+                        <path d="M12 8l-1.5-4M12 8l1.5-4M12 16l-1.5 4M12 16l1.5 4" />
+                    </svg>
+                    <span class="text-[11px] font-bold tracking-wide uppercase text-gray-300">Cheer</span>
+                </a>
+
+                <!-- Football (Bola Khas American Football dengan Jahitan Tali) -->
+                <!-- === [DIRECT LINK: FOOTBALL] === -->
+                <a href="https://your-football-url.com" class="bg-[#222222] border border-white/5 hover:border-blue-600 hover:bg-[#2c2c2c] p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all group">
+                    <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-500 mb-2 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Outline Oval Melengkung Bola Genggam -->
+                        <path d="M3 13.5C6 6.5 12.5 5 21 3c-2 8.5-3.5 15-10.5 18-3-2-6-4.5-7.5-7.5z" />
+                        <!-- Jahitan Tali Putih Tengah -->
+                        <line x1="7.5" y1="16.5" x2="16.5" y2="7.5" />
+                        <line x1="9" y1="12" x2="12" y2="15" />
+                        <line x1="12" y1="9" x2="15" y2="12" />
+                    </svg>
+                    <span class="text-[11px] font-bold tracking-wide uppercase text-gray-300">Football</span>
+                </a>
+
+                <!-- Ice Hockey (Sepasang Stick Silang & Puck Hitam) -->
+                <!-- === [DIRECT LINK: ICE HOCKEY] === -->
+                <a href="https://your-hockey-url.com" class="bg-[#222222] border border-white/5 hover:border-blue-600 hover:bg-[#2c2c2c] p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all group">
+                    <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-500 mb-2 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Stick Kiri -->
+                        <path d="M19.5 3.5L8 15" />
+                        <path d="M8 15l-4.5 1.5c-.8.3-1.5-.4-1.2-1.2L3.8 11" />
+                        <!-- Stick Kanan -->
+                        <path d="M4.5 3.5L16 15" />
+                        <path d="M16 15l4.5 1.5c.8.3 1.5-.4 1.2-1.2L20.2 11" />
+                        <!-- Puck Es Bulat -->
+                        <ellipse cx="12" cy="18" rx="2.5" ry="1.2" fill="currentColor" />
+                    </svg>
+                    <span class="text-[11px] font-bold tracking-wide uppercase text-gray-300">Ice Hockey</span>
+                </a>
+
+                <!-- Soccer (Bola Sepak Geometris Klasik) -->
+                <!-- === [DIRECT LINK: SOCCER] === -->
+                <a href="https://your-soccer-url.com" class="bg-[#222222] border border-white/5 hover:border-blue-600 hover:bg-[#2c2c2c] p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all group">
+                    <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-500 mb-2 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                        <!-- Lingkaran Luar -->
+                        <circle cx="12" cy="12" r="10" />
+                        <!-- Poligon Tengah (Pentagon) -->
+                        <polygon points="12,9 14.5,11 13.5,14 10.5,14 9.5,11" fill="currentColor" class="text-gray-400 group-hover:text-blue-500" />
+                        <!-- Garis Hubung ke Tepi Bola -->
+                        <path d="M12 9V2M14.5 11l5-2M13.5 14l3.5 4M10.5 14l-3.5 4M9.5 11l-5-2" />
+                    </svg>
+                    <span class="text-[11px] font-bold tracking-wide uppercase text-gray-300">Soccer</span>
+                </a>
+
+                <!-- Volleyball (Bola Voli dengan Jahitan Garis Melingkar) -->
+                <!-- === [DIRECT LINK: VOLLEYBALL] === -->
+                <a href="https://your-volleyball-url.com" class="bg-[#222222] border border-white/5 hover:border-blue-600 hover:bg-[#2c2c2c] p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all group">
+                    <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-500 mb-2 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <!-- Alur Spiral Panel Voli -->
+                        <path d="M12 2a10 10 0 0 1 0 20" />
+                        <path d="M2 12a10 10 0 0 1 20 0" />
+                        <path d="M19 5c-3.5 3.5-10.5 3.5-14 0" />
+                        <path d="M5 19c3.5-3.5 10.5-3.5 14 0" />
+                    </svg>
+                    <span class="text-[11px] font-bold tracking-wide uppercase text-gray-300">Volleyball</span>
+                </a>
+
+                <!-- Wrestling (Sepasang Atlet Bertarung / Helm Pelindung Telinga Wrestler) -->
+                <!-- === [DIRECT LINK: WRESTLING] === -->
+                <a href="https://your-wrestling-url.com" class="bg-[#222222] border border-white/5 hover:border-blue-600 hover:bg-[#2c2c2c] p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all group">
+                    <svg class="w-8 h-8 text-gray-400 group-hover:text-blue-500 mb-2 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Siluet Matras Lingkaran Gulat -->
+                        <ellipse cx="12" cy="17" rx="9" ry="4" />
+                        <!-- Wrestler 1 (Kiri) -->
+                        <circle cx="9" cy="7" r="2" />
+                        <path d="M6 14v-3a2 2 0 0 1 2-2h2" />
+                        <!-- Wrestler 2 (Kanan) -->
+                        <circle cx="15" cy="7" r="2" />
+                        <path d="M18 14v-3a2 2 0 0 0-2-2h-2" />
+                        <!-- Kontak Gulat/Kunci Tangan -->
+                        <path d="M9 10l3 2 3-2" />
+                    </svg>
+                    <span class="text-[11px] font-bold tracking-wide uppercase text-gray-300">Wrestling</span>
+                </a>
+
             </div>
-            
-            <!-- ========================================== -->
-            <!-- 🟡 BANNER #2 - DI BAWAH TOMBOL -->
-            <!-- ========================================== -->
-            <div class="banner-container">
-                <div class="banner-label">Advertisement</div>
-                <div id="banner-middle-1">
-                    <!-- ⬇️⬇️⬇️ PASTE KODE BANNER 728x90 DI SINI ⬇️⬇️⬇️ -->
-                 <script>
-  atOptions = {
-    'key' : '7ffb0c3b2b0210b9ad12988a220bd904',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://encouragementglutton.com/7ffb0c3b2b0210b9ad12988a220bd904/invoke.js"></script>
+        </div>
+    </section>
 
+    <!-- === 9. LOGO BRAND JARINGAN MITRA (TV Sports) === -->
+    <section class="max-w-5xl mx-auto px-4 pb-20">
+        <div class="bg-[#141414] border border-white/5 rounded-xl p-6 sm:p-8 text-center">
+            <h3 class="font-montserrat font-black text-lg tracking-wider text-gray-300 uppercase mb-8">
+                TV SPORTS
+            </h3>
 
-                    <!-- ⬆️⬆️⬆️ PASTE KODE BANNER DI SINI ⬆️⬆️⬆️ -->
+            <!-- Grid Logo Saluran / Jaringan -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-8 items-center justify-center opacity-70">
+                
+                <!-- NFHS Network Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-montserrat font-black text-sm tracking-tighter text-white border-2 border-white px-2 py-0.5">NFHS NETWORK</span>
                 </div>
-            </div>
-            
-            <!-- ========================================== -->
-            <!-- 🟡 BANNER #3 - DI BAWAH TOMBOL (bawah) -->
-            <!-- ========================================== -->
-            <div class="banner-container">
-                <div class="banner-label">Advertisement</div>
-                <div id="banner-middle-2">
-                    <!-- ⬇️⬇️⬇️ PASTE KODE BANNER 320x50 ATAU 468x60 DI SINI ⬇️⬇️⬇️ -->
-                    <script>
-  atOptions = {
-    'key' : '85ce87d2c92503775761ed4fff3dfb99',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://encouragementglutton.com/85ce87d2c92503775761ed4fff3dfb99/invoke.js"></script>
 
-                    <!-- ⬆️⬆️⬆️ PASTE KODE BANNER DI SINI ⬆️⬆️⬆️ -->
+                <!-- Hudl TV Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-sans font-black text-xl italic text-orange-500">hudl<span class="text-white text-xs bg-orange-500 px-1 rounded ml-1">TV</span></span>
                 </div>
-            </div>
-            
-            <p class="text-gray-500 text-xs mt-4">No credit card required • Instant access • Watch anywhere</p>
-        </div>
-    </div>
 
-    <!-- ========================================== -->
-    <!-- STATS & FEATURES -->
-    <!-- ========================================== -->
-    <div class="max-w-6xl mx-auto px-4 py-16">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            <div class="stat-card p-4 rounded-xl text-center">
-                <div class="text-3xl mb-2">🏈</div>
-                <p class="font-bold text-xl">500+</p>
-                <p class="text-xs text-gray-400">Live Games/Season</p>
-            </div>
-            <div class="stat-card p-4 rounded-xl text-center">
-                <div class="text-3xl mb-2">🏀</div>
-                <p class="font-bold text-xl">50+</p>
-                <p class="text-xs text-gray-400">High Schools</p>
-            </div>
-            <div class="stat-card p-4 rounded-xl text-center">
-                <div class="text-3xl mb-2">📺</div>
-                <p class="font-bold text-xl">4K</p>
-                <p class="text-xs text-gray-400">Ultra HD Quality</p>
-            </div>
-            <div class="stat-card p-4 rounded-xl text-center">
-                <div class="text-3xl mb-2">⚡</div>
-                <p class="font-bold text-xl">0</p>
-                <p class="text-xs text-gray-400">Buffering</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- KONTEN PROMOSI -->
-    <!-- ========================================== -->
-    <div class="max-w-4xl mx-auto px-4 pb-16">
-        <div class="card-navy p-8 md:p-12 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                🎓 <span class="text-blue-400">FREE</span> for Students & Families!
-            </h2>
-            
-            <div class="space-y-6 text-gray-300 feature-text text-left md:text-center">
-                <p>
-                    🏆 <strong class="text-white">High School Sports Network</strong> brings you LIVE coverage of 
-                    football, basketball, baseball, soccer, volleyball, and more from schools across the nation.
-                </p>
-                
-                <p>
-                    📺 <strong class="text-white">Watch on any device:</strong> Smart TV, Laptop, Tablet, or Smartphone
-                </p>
-                
-                <p>
-                    🎙️ <strong class="text-white">Professional commentary</strong> • Instant replays • Real-time stats
-                </p>
-                
-                <p>
-                    🏅 <strong class="text-white">Championship games, playoffs, and rivalries</strong> — every moment matters!
-                </p>
-                
-                <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6 mt-8">
-                    <p class="text-xl font-semibold">
-                        🔥 <strong class="text-blue-400">LIMITED TIME OFFER</strong> — Premium Access FREE
-                    </p>
-                    <p class="text-sm text-gray-300 mt-2">
-                        Click REGISTER or LOGIN now to start watching
-                    </p>
-                    <p class="text-xs text-gray-400 mt-3">
-                        ✅ No credit card • ✅ Cancel anytime • ✅ 100% free trial
-                    </p>
+                <!-- GameChanger Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-montserrat font-black italic text-base text-[#00df82]">GAMECHANGER</span>
                 </div>
+
+                <!-- MaxPreps Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-sans font-black text-lg text-red-600">MAX<span class="text-white">PREPS</span></span>
+                </div>
+
+                <!-- Fubo TV Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-sans font-bold text-xl text-white">fubo<span class="text-orange-500 font-black">tv</span></span>
+                </div>
+
+                <!-- KFBC TV Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-sans font-black text-lg tracking-tight text-blue-500">KFBC<span class="text-white text-xs">TV</span></span>
+                </div>
+
+                <!-- WPRG TV Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-sans font-black text-lg tracking-tight text-red-500">WPRG<span class="text-white text-xs">TV</span></span>
+                </div>
+
+                <!-- ESPN Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-sans font-black italic text-3xl text-red-600 tracking-tighter border-b-4 border-red-600">ESPN</span>
+                </div>
+
+                <!-- NBC Sports Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-sans font-extrabold text-base text-white tracking-widest uppercase">NBC Sports</span>
+                </div>
+
+                <!-- Fox Sports Logo -->
+                <div class="flex items-center justify-center h-12">
+                    <span class="font-sans font-black text-base text-white uppercase italic">FOX SPORTS</span>
+                </div>
+
+            </div>
+
+            <!-- Navigasi Korsel Bawah -->
+            <div class="flex items-center justify-center space-x-6 mt-8 text-xs font-bold uppercase tracking-widest text-gray-500">
+                <button class="hover:text-white transition-colors">&lt; NEXT</button>
+                <button class="hover:text-white transition-colors">PREV &gt;</button>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ========================================== -->
-    <!-- SPORTS GRID -->
-    <!-- ========================================== -->
-    <div class="max-w-6xl mx-auto px-4 pb-16">
-        <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">
-            COVERING <span class="text-blue-400">ALL SPORTS</span>
-        </h2>
-        <div class="grid grid-cols-2 md:grid-cols-6 gap-3 text-center">
-            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div class="text-2xl">🏈</div>
-                <p class="text-xs font-semibold mt-1">Football</p>
-            </div>
-            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div class="text-2xl">🏀</div>
-                <p class="text-xs font-semibold mt-1">Basketball</p>
-            </div>
-            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div class="text-2xl">⚾</div>
-                <p class="text-xs font-semibold mt-1">Baseball</p>
-            </div>
-            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div class="text-2xl">⚽</div>
-                <p class="text-xs font-semibold mt-1">Soccer</p>
-            </div>
-            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div class="text-2xl">🏐</div>
-                <p class="text-xs font-semibold mt-1">Volleyball</p>
-            </div>
-            <div class="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div class="text-2xl">🏃</div>
-                <p class="text-xs font-semibold mt-1">Track</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========================================== -->
     <!-- FOOTER -->
-    <!-- ========================================== -->
-    <footer class="border-t border-blue-500/20 mt-8 py-8 text-center text-gray-500 text-xs">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="#" class="hover:text-blue-400">Terms & Conditions</a>
-                <a href="#" class="hover:text-blue-400">Privacy Policy</a>
-                <a href="#" class="hover:text-blue-400">Contact Us</a>
-            </div>
-            <p>&copy; 2026 High School Sports Network. All rights reserved.</p>
-            <p class="mt-1">Empowering young athletes • Celebrating school spirit</p>
+    <footer class="bg-black border-t border-white/5 py-12 pb-safe-bottom">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xs text-gray-500">&copy; 2026 High School Sports TV Network. All copyrights are protected by law.</p>
         </div>
     </footer>
 
-    <!-- ========================================== -->
-    <!-- COUNTDOWN SCRIPT -->
-    <!-- ========================================== -->
+    <!-- === 10. REAL-TIME USERS ONLINE BADGE === -->
+    <div class="fixed bottom-4 right-4 z-50 bg-black/90 border border-white/10 px-4 py-2.5 rounded-lg shadow-2xl flex items-center space-x-2 select-none">
+        <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+        </span>
+        <span class="text-[10px] sm:text-xs font-bold text-gray-200">
+            <span id="userCount">9443</span> Users Online Now
+        </span>
+    </div>
+
+    <!-- SCRIPT UTAMA -->
     <script>
-        function startCountdown() {
-            const endTime = new Date().getTime() + (1 * 60 * 60 * 1000);
-            const timer = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = endTime - now;
-                if (distance < 0) {
-                    clearInterval(timer);
-                    document.getElementById('hours').innerText = '00';
-                    document.getElementById('minutes').innerText = '00';
-                    document.getElementById('seconds').innerText = '00';
-                    return;
-                }
-                document.getElementById('hours').innerText = Math.floor(distance / (1000 * 60 * 60)).toString().padStart(2, '0');
-                document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-                document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
-            }, 1000);
-        }
-        document.addEventListener('DOMContentLoaded', startCountdown);
+        // Memuat ikon Lucide
+        lucide.createIcons();
+
+        // Penghitung Pengguna Online yang Berubah Secara Dinamis
+        setInterval(() => {
+            const countSpan = document.getElementById('userCount');
+            let currentCount = parseInt(countSpan.innerText);
+            // Menambah atau mengurangi jumlah penonton secara acak untuk efek realistis
+            const change = Math.floor(Math.random() * 11) - 5; // -5 sampai +5
+            countSpan.innerText = currentCount + change;
+        }, 3000);
     </script>
-  <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
-<!-- Histats.com  START  (aync)-->
-<script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,5023630,4,22,130,30,00011111']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('//s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5023630&101" alt="" border="0"></a></noscript>
-<!-- Histats.com  END  -->
 </body>
 </html>
